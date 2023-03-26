@@ -1,6 +1,7 @@
 mod location;
 mod transaction;
 
+use location::Continent;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
@@ -47,16 +48,10 @@ fn main() {
         println!("Continent: '{}', Invested Amount: {}", *continent, *amount);
     }
 
-    /*
-    BONUS:
-       Utilize HashMap to keep track of the total invested amount per continent
-           and print the result out for each continent
-           - Hint: You would need to convert the continent to String to store as keys
-           - Create a function that takes in a reference slice of transactions and a
-           reference of Continent, and filters rows by the Continent. Print only
-           transactions with European companies
-           - Hint: You would need to utilise lifetimes, iterators, and filter functio
-    */
+    println!("Transactions in Europe");
+    for tx in get_transactions_for_continent(&transactions, &Continent::Europe) {
+        println!("{:?}", *tx);
+    }
 
     for skipped_tx in skipped_lines.iter() {
         println!(
@@ -64,4 +59,16 @@ fn main() {
             skipped_tx.0, skipped_tx.1
         );
     }
+}
+
+fn get_transactions_for_continent<'a, 'b>(
+    transactions: &'a [Transaction],
+    continent: &'b Continent,
+) -> Vec<&'a Transaction> {
+    let continent_transactions = transactions
+        .iter()
+        .filter(|tx| tx.continent == *continent)
+        .collect::<Vec<_>>();
+
+    return continent_transactions;
 }

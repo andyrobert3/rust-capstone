@@ -16,7 +16,7 @@ pub enum Country {
     Switzerland,
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum Continent {
     NorthAmerica,
     Europe,
