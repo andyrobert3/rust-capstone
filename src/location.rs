@@ -25,6 +25,18 @@ pub enum Continent {
     SouthAmerica,
 }
 
+impl Continent {
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            Continent::NorthAmerica => "NorthAmerica",
+            Continent::Europe => "Europe",
+            Continent::Asia => "Asia",
+            Continent::Oceania => "Oceania",
+            Continent::SouthAmerica => "SouthAmerica",
+        }
+    }
+}
+
 impl Country {
     pub fn country_to_continent(&self) -> Continent {
         match self {

@@ -4,12 +4,12 @@ use chrono::NaiveDate;
 #[derive(Debug)]
 #[allow(dead_code)]
 pub struct Transaction {
-    transaction_id: u32,
+    pub continent: Continent,
+    pub amount: f64,
+    pub transaction_id: u32,
     client_id: u32,
     asset_name: String,
     country: Country,
-    continent: Continent,
-    amount: f64,
     days_under_management: i64,
 }
 
