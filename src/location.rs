@@ -26,6 +26,9 @@ pub enum Continent {
 }
 
 impl Continent {
+    /**
+     * Returns a string representation of the continent
+     */
     pub fn as_str(&self) -> &'static str {
         match self {
             Continent::NorthAmerica => "NorthAmerica",
@@ -38,6 +41,9 @@ impl Continent {
 }
 
 impl Country {
+    /**
+     * Maps the "Country" to a "Continent" struct
+     */
     pub fn country_to_continent(&self) -> Continent {
         match self {
             Country::UnitedStates | Country::Canada => Continent::NorthAmerica,
@@ -56,10 +62,15 @@ impl Country {
     }
 }
 
+// To support "parse" fn, we need to implement "FromStr" function -> https://doc.rust-lang.org/std/str/trait.FromStr.html
 impl std::str::FromStr for Country {
     // What does this mean?
     type Err = &'static str;
 
+    /**
+     * Parses a string into a Country struct
+     * Throws an error if the string is not a valid country name
+     */
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "USA" => Ok(Country::UnitedStates),
